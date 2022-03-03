@@ -18,10 +18,20 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_
 cur = conn.cursor()
 
 print(cur.execute("SELECT * FROM \"User\""))
+
+
 rows = cur.fetchall()
+# cur.execute('''UPDATE \"User\"
+# SET "name" = "Adam Tan(demo)"
+# WHERE "name"="Adam Tan(Click here for demo)";''')
 
 userlist = []
 
+# user = User(23006,"Adam Tan (demo)","311B","PENDING","?")
+# user2 = User(23007,"Micheal Lim","311B","PENDING","?")
+
+# writeusertoDb(user,cur)
+# writeusertoDb(user2,cur)
 
 for user in rows:
     id = user[0]
@@ -30,17 +40,16 @@ for user in rows:
     status = user[3]
     group = user[4]
     userlist.append(User(id , name , ic , status , group))
-    print(user)
+    #print(user)
 
 
-# for i in getnewusers():
-#     writeusertoDb(i,cur)
-#     print("asd")
-
-addStationtoDb((userlist[10]),3,cur)
+for i in getnewusers():
+    writeusertoDb(i,cur)
+    print("asd")
 
 print("asdasd")
 conn.commit()
 cur.close()
 conn.close()
+print("asdasdasdasd")
 
